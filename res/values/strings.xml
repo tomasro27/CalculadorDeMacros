@@ -7,11 +7,39 @@
     <string name="title_activity_macros_calculator">MacrosCalculator</string>
     <string name="hello_world">Hello world!</string>
     <string name="name">Nombre</string>
-    <resources>
-  		<string-array name="sex">
-    		<item>Hombre</item>
-   		 	<item>Mujer</item>
-  		</string-array>
-</resources>
+	<string-array name="sex">
+  		<item>Hombre</item>
+ 	 	<item>Mujer</item>
+	</string-array>
+	<string name="age">Edad</string>
+	<string name="height">Estatura</string>
+	<string-array name="cm_or_inches">
+  		<item>Centimetros</item>
+ 	 	<item>Pulgadas</item>
+	</string-array>
+	<string-array name="kg_or_lbs">
+  		<item>Kilogramos</item>
+ 	 	<item>Libras</item>
+	</string-array>
+	<string name="weight">Peso</string>
+	<string name="bodyfat">Porcentaje de grasa</string>
+	<string-array name="exercise_levels">
+	    <item>no hago ejercicio</item>
+  		<item>entreno 1 vez por semana</item>
+ 	 	<item>entreno 2 veces por semana</item>
+ 	 	<item>entreno 3 veces por semana</item>
+ 	 	<item>entreno 4 veces por semana</item>
+ 	 	<item>entreno 5 veces por semana</item>
+ 	 	<item>entreno 6 veces por semana</item>
+ 	 	<item>entreno 7 veces por semana</item>
+	</string-array>
+		<string-array name="fitness_goal">
+  		<item>Perder Grasa</item>
+ 	 	<item>Mantenimiento</item>
+ 	 	<item>Ganar Masa Muscular</item>
+	</string-array>
+	<string name="calculate">Calcular</string>
+	
+	
 
 </resources>

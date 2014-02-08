@@ -16,7 +16,8 @@
         android:layout_centerHorizontal="true"
         android:ems="10"
         android:inputType="textPersonName" 
-        android:hint="@string/name" />
+        android:hint="@string/name" 
+        android:padding="10dp"/>
 
     <Spinner
         android:id="@+id/sex"
@@ -25,7 +26,107 @@
         android:layout_alignLeft="@+id/name"
         android:layout_below="@+id/name" 
         android:layout_centerHorizontal="true"
-        android:drawSelectorOnTop="true"/>
-   	
+        android:drawSelectorOnTop="true"
+        android:entries="@array/sex"
+        android:padding="10dp"/>
+    
+    <EditText
+        android:id="@+id/age"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:ems="10" 
+        android:hint="@string/age"
+        android:layout_alignLeft="@id/sex"
+        android:layout_below="@id/sex"
+        android:padding="10dp"
+         />
+    
+    <EditText
+        android:id="@+id/height"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:ems="10" 
+        android:inputType="number"
+        android:hint="@string/height"
+        android:layout_alignLeft="@id/age"
+        android:layout_below="@id/age"
+        android:padding="10dp"
+        
+         />
 
+        <Spinner
+            android:id="@+id/height_format"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/age"
+            android:layout_toRightOf="@id/height"
+            android:drawSelectorOnTop="true"
+            android:entries="@array/cm_or_inches" 
+            android:padding="10dp"/>
+
+        <EditText
+	        android:id="@+id/weight"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_centerHorizontal="true"
+	        android:ems="10" 
+	        android:inputType="number"
+	        android:hint="@string/weight"
+	        android:layout_alignLeft="@id/height"
+	        android:layout_below="@id/height"
+	        android:padding="10dp"
+         />
+        
+          <Spinner
+            android:id="@+id/weight_format"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/height"
+            android:layout_toRightOf="@id/weight"
+            android:drawSelectorOnTop="true"
+            android:entries="@array/kg_or_lbs" 
+            android:padding="10dp"/>
+          
+         <EditText
+	        android:id="@+id/bodyfat"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_centerHorizontal="true"
+	        android:ems="10" 
+	        android:inputType="number"
+	        android:hint="@string/bodyfat"
+	        android:layout_alignLeft="@id/weight"
+	        android:layout_below="@id/weight"
+	        android:padding="10dp"
+         />
+         
+            <Spinner
+	            android:id="@+id/exercise_level"
+	            android:layout_width="fill_parent"
+	            android:layout_height="wrap_content"
+	            android:layout_below="@id/bodyfat"
+	            android:entries="@array/exercise_levels" 
+	            android:drawSelectorOnTop="true"
+	            android:padding="10dp"/>
+            <Spinner
+	            android:id="@+id/fitness_goal"
+	            android:layout_width="fill_parent"
+	            android:layout_height="wrap_content"
+	            android:layout_below="@id/exercise_level"
+	            android:entries="@array/fitness_goal" 
+	            android:drawSelectorOnTop="true"
+	            android:padding="10dp"
+	            />
+            
+            <Button 
+                android:id="@+id/calculate"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/fitness_goal"
+                android:padding="10dp"
+                android:text="@string/calculate"
+                android:onClick="calculateMacros"/>
+          
 </RelativeLayout>

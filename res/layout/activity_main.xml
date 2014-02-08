@@ -14,5 +14,4 @@
         android:text="@string/new_macros_text"
         android:textColor="#FFFFFF" 
         android:onClick="openMacrosCalculator"/>
-    
 </RelativeLayout>
