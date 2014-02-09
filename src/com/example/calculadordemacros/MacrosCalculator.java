@@ -1,6 +1,7 @@
 package com.example.calculadordemacros;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.Menu;
@@ -27,9 +28,9 @@ public class MacrosCalculator extends Activity {
 	static String selected_exercise_level;
 	double weight_converted;
 	double height_converted;
-	double proteins;
-	double carbs;
-	double fats;
+	static double proteins;
+	static double carbs;
+	static double fats;
 	boolean calculated;
 
 	
@@ -115,6 +116,22 @@ public class MacrosCalculator extends Activity {
 		});
 			
 			
+	}
+	
+	public void saveResults(View view){
+		if(calculated == false)
+		{
+			Toast.makeText(getApplicationContext(), "Primero calcula el resultado antes de guardarlo",
+					   Toast.LENGTH_LONG).show();
+			return;
+		}
+		Intent data_back = new Intent();
+	    data_back.putExtra("proteins" , proteins);
+	    data_back.putExtra("carbs", carbs);
+	    data_back.putExtra("fats", fats);
+	    setResult(android.app.Activity.RESULT_OK, data_back);
+	    
+	    finish();
 	}
 	
 	public void calculateMacros(View view)
@@ -231,6 +248,7 @@ public class MacrosCalculator extends Activity {
 		}
 			
 	}
+	
 	
 	public class SpinnerActivity extends Activity implements OnItemSelectedListener {
 	    

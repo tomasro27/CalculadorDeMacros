@@ -7,12 +7,15 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 public class MainActivity extends Activity {
 	
 	Button newMacros;
-	int macros_result;
-	Bitmap bmp;
+	double prots;
+	double carbs;
+	double fats;
+	static int MY_REQUEST_CODE = 222;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -45,23 +48,35 @@ public class MainActivity extends Activity {
 	public void openMacrosCalculator(View view)
 	{
 		Intent intent = new Intent(this, MacrosCalculator.class);
-		startActivityforResults(intent);
+		startActivityForResult(intent, MY_REQUEST_CODE);
 	}
-
-	private void startActivityforResults(Intent intent) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
+	
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		// TODO Auto-generated method stub
-		super.onActivityResult(requestCode, resultCode, data);
-		if(resultCode == RESULT_OK){
-			Bundle extras = data.getExtras();
-			Bit
-		}
+	    super.onActivityResult(requestCode, resultCode, data);
+	    //TODO handle here.         
+	    
+	    if ( requestCode == MY_REQUEST_CODE ) 
+        {
+            if (resultCode == Activity.RESULT_OK ) 
+            {       
+			    this.prots = data.getExtras().getFloat("prots");
+			    this.carbs = data.getExtras().getFloat("carbs");
+			    this.fats = data.getExtras().getFloat("fats");
+			    
+			    Toast.makeText(getApplicationContext(), prots + " " + carbs + " " + fats,
+						   Toast.LENGTH_LONG).show();
+            }
+        }
+	    
+	    
 	}
+	
+
+	
+	
+
+
+
 	
 	
 }
