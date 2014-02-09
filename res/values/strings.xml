@@ -25,13 +25,13 @@
 	<string name="bodyfat">Porcentaje de grasa</string>
 	<string-array name="exercise_levels">
 	    <item>no hago ejercicio</item>
-  		<item>entreno 1 vez por semana</item>
- 	 	<item>entreno 2 veces por semana</item>
  	 	<item>entreno 3 veces por semana</item>
  	 	<item>entreno 4 veces por semana</item>
  	 	<item>entreno 5 veces por semana</item>
  	 	<item>entreno 6 veces por semana</item>
- 	 	<item>entreno 7 veces por semana</item>
+ 	 	<item>entrenamiento intenso 5 veces por semana</item>
+ 	 	<item>entrenamiento 7 veces por semana</item>
+ 	 	<item>dos veces por dia</item>
 	</string-array>
 		<string-array name="fitness_goal">
   		<item>Perder Grasa</item>
@@ -39,6 +39,10 @@
  	 	<item>Ganar Masa Muscular</item>
 	</string-array>
 	<string name="calculate">Calcular</string>
+	
+	<string name="results">Presiona el boton de calcular para obtener tus resultados.</string>
+	<string name="saveResults">Guardar Resultados</string>
+	
 	
 	
 

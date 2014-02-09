@@ -10,6 +10,7 @@ import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class MacrosCalculator extends Activity {
@@ -17,6 +18,8 @@ public class MacrosCalculator extends Activity {
 	
 	EditText name, age, height, weight, bodyfat;
 	Spinner sex, height_format, fitness_goal, exercise_level, weight_format;
+	TextView result;
+	
 	static String selected_sex;
 	static String selected_weight_format;
 	static String selected_height_format;
@@ -27,6 +30,7 @@ public class MacrosCalculator extends Activity {
 	double proteins;
 	double carbs;
 	double fats;
+	boolean calculated;
 
 	
 	
@@ -35,6 +39,7 @@ public class MacrosCalculator extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_macros_calculator);
 		
+		calculated = false;
 		name = (EditText) findViewById(R.id.name);
 		sex = (Spinner) findViewById(R.id.sex);
 		age = (EditText) findViewById(R.id.age);
@@ -45,6 +50,7 @@ public class MacrosCalculator extends Activity {
 		weight_format = (Spinner) findViewById (R.id.weight_format);
 		weight = (EditText) findViewById (R.id.weight);
 		bodyfat = (EditText) findViewById (R.id.bodyfat);
+		result = (TextView) findViewById (R.id.result);
 		
 		ArrayAdapter<CharSequence> sex_adapter = ArrayAdapter.createFromResource(this,
 		        R.array.sex, android.R.layout.simple_spinner_item);
@@ -107,14 +113,7 @@ public class MacrosCalculator extends Activity {
 		    public void onNothingSelected(AdapterView<?> parent) {
 		    }
 		});
-		
-		weight_converted =  (Double.parseDouble(weight.getText().toString()));
-		if(selected_weight_format == "Libras")
-			weight_converted *= 0.453592;
-		height_converted = (Double.parseDouble(height.getText().toString()));
-		if(selected_height_format == "inches")
-			height_converted *= 2.54;
-		
+			
 			
 	}
 	
@@ -128,48 +127,105 @@ public class MacrosCalculator extends Activity {
 		}
 		else
 		{	
+			
+			try {
+			    weight_converted = new Double(weight.getText().toString());
+			} catch (NumberFormatException e) {
+			    weight_converted = 0;
+			}
+			if(selected_weight_format.equals("Libras"))
+				weight_converted *= 0.453592;
+			
+			try {
+			    height_converted = new Double(height.getText().toString());
+			} catch (NumberFormatException e) {
+			    height_converted = 0; 
+			}
+			if(selected_height_format.equals("inches"))
+				height_converted *= 2.54;
+			
+			double BMR;
 			double TDEE;
 			double lean_body_mass;
-			lean_body_mass = ((weight_converted *Double.parseDouble(bodyfat.getText().toString()))/100);
-			if(TextUtils.isEmpty(bodyfat.getText()) || Double.parseDouble(bodyfat.getText().toString())==0)
+			double bodyfat_converted;
+			try {
+			   bodyfat_converted = new Double(bodyfat.getText().toString());
+			} catch (NumberFormatException e) {
+			    bodyfat_converted = 0; 
+			}
+			lean_body_mass = weight_converted * ((100 -bodyfat_converted)/100);
+			
+			double age_converted;
+			try {
+			    age_converted = new Double(age.getText().toString());
+			} catch (NumberFormatException e) {
+			    age_converted = 0;
+			}
+			
+			if(TextUtils.isEmpty(bodyfat.getText()) || bodyfat_converted ==0)
 			{
-				if(selected_sex == "Hombre")
-					TDEE = 10.0 * weight_converted + 6.25 *  
-					height_converted - 5.0 *  Double.parseDouble(age.getText().toString()) +5.0;
+				if(selected_sex.equals("Hombre"))
+				{
+					BMR = (10.0 * weight_converted) + (6.25 *  height_converted) - (5.0 *  age_converted) +5.0;
+					bodyfat_converted = (0.32810 * weight_converted) + (0.33929 * height_converted) - 29.5336;
+				}
 				else
-					TDEE = 10.0 * weight_converted + 6.25 *  
-					height_converted - 5.0 *  Double.parseDouble(age.getText().toString()) -161.0;
+				{
+					BMR = (10.0 * weight_converted) + (6.25 *  height_converted) - (5.0 * age_converted) -161.0;
+					bodyfat_converted = ( 0.29569 * weight_converted) + (0.41813 * height_converted) - 43.2933;
+				}
 			}
 			else
 			{
-				TDEE = (21.6 * lean_body_mass) + 370;
+				BMR = (21.6 * lean_body_mass) + 370;
 			}
 			
-			if(selected_fitness_goal == "Perder Grasa")
+			if(selected_exercise_level.equals("no hago ejercicio"))
+				TDEE = BMR * 1.2;
+			else if(selected_exercise_level.equals("entreno 3 veces por semana"))
+				TDEE = BMR * 1.375;
+			else if(selected_exercise_level.equals("entreno 4 veces por semana"))
+				TDEE = BMR * 1.42;
+			else if(selected_exercise_level.equals("entreno 5 veces por semana"))
+				TDEE = BMR * 1.46;
+			else if(selected_exercise_level.equals("entreno 6 veces por semana"))
+				TDEE = BMR * 1.506;
+			else if(selected_exercise_level.equals("entrenamiento intenso 5 veces por semana"))
+				TDEE = BMR * 1.55;
+			else if(selected_exercise_level.equals("entreno 7 veces por semana"))
+				TDEE = BMR * 1.637;
+			else if(selected_exercise_level.equals("dos veces por dia"))
+				TDEE = BMR * 1.724;
+			else
+				TDEE = BMR;
+
+			
+			if(selected_fitness_goal.equals("Perder Grasa"))
 			{
-				TDEE = TDEE - (TDEE*0.2);
-				proteins = 1.5*lean_body_mass;
-				fats = 0.35 * lean_body_mass;
-				carbs = (TDEE - (proteins*4) -(fats*9))/4;
+				 TDEE = TDEE - (TDEE*0.2);
+				proteins = 1.5*lean_body_mass * 2.20462;
+				fats = 0.35 * lean_body_mass * 2.20462;
+				carbs = ((TDEE - (proteins*4)) -(fats*9))/4;
 			}
-			else if(selected_fitness_goal == "Ganar Masa Muscular")
-			{
+			else if(selected_fitness_goal.equalsIgnoreCase("Ganar Masa Muscular"))
+			{	
 				TDEE = TDEE + (TDEE*0.15);
-				proteins = 1*lean_body_mass;
-				fats = 0.40 * lean_body_mass;
+				proteins = 1*lean_body_mass * 2.20462;
+				fats = 0.45 * lean_body_mass * 2.20462;
 				carbs = (TDEE - (proteins*4) -(fats*9))/4;
 			}
 			else
 			{
-				proteins = 1*lean_body_mass;
-				fats = 0.4 * lean_body_mass;
-				carbs = (TDEE - (proteins*4) - (fats*9))/4;
+				proteins = 1 * lean_body_mass * 2.20462;
+				fats = 0.4 * lean_body_mass * 2.20462;
+				carbs = ((TDEE - (proteins*4)) - (fats*9))/4;
 			}
 			
+			final TextView mTextView = (TextView) findViewById(R.id.result);
+			mTextView.setText("CALORIAS: " + String.format("%d", (int)TDEE) + "\n" +"PROTEINAS: " 
+					+ String.format("%d", (int)proteins) + "\n" + "CARBOHIDRATOS: " +String.format("%d", (int)carbs) + "\n" + "GRASAS " + String.format("%d", (int)fats));
 			
-			Toast.makeText(getApplicationContext(), "Tus calorias son " + TDEE +" Tus proteinas " 
-			+ proteins + " Tus carbs " +carbs + " Tus fats " + fats , Toast.LENGTH_LONG).show();
-			
+			calculated = true;
 			return;
 			
 		}

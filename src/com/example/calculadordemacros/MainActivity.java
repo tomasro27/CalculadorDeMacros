@@ -2,6 +2,7 @@ package com.example.calculadordemacros;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
@@ -10,6 +11,8 @@ import android.widget.Button;
 public class MainActivity extends Activity {
 	
 	Button newMacros;
+	int macros_result;
+	Bitmap bmp;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -42,8 +45,25 @@ public class MainActivity extends Activity {
 	public void openMacrosCalculator(View view)
 	{
 		Intent intent = new Intent(this, MacrosCalculator.class);
-		startActivity(intent);
+		startActivityforResults(intent);
 	}
+
+	private void startActivityforResults(Intent intent) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		// TODO Auto-generated method stub
+		super.onActivityResult(requestCode, resultCode, data);
+		if(resultCode == RESULT_OK){
+			Bundle extras = data.getExtras();
+			Bit
+		}
+	}
+	
+	
 }
 
 

@@ -31,7 +31,7 @@ public final class R {
         public static final int ic_launcher=0x7f020000;
     }
     public static final class id {
-        public static final int action_settings=0x7f09000c;
+        public static final int action_settings=0x7f09000e;
         public static final int age=0x7f090002;
         public static final int bodyfat=0x7f090007;
         public static final int calculate=0x7f09000a;
@@ -40,7 +40,9 @@ public final class R {
         public static final int height=0x7f090003;
         public static final int height_format=0x7f090004;
         public static final int name=0x7f090000;
-        public static final int newMacros=0x7f09000b;
+        public static final int newMacros=0x7f09000d;
+        public static final int result=0x7f09000b;
+        public static final int saveResults=0x7f09000c;
         public static final int sex=0x7f090001;
         public static final int weight=0x7f090005;
         public static final int weight_format=0x7f090006;
@@ -63,6 +65,8 @@ public final class R {
         public static final int hello_world=0x7f050004;
         public static final int name=0x7f050005;
         public static final int new_macros_text=0x7f050002;
+        public static final int results=0x7f05000b;
+        public static final int saveResults=0x7f05000c;
         public static final int title_activity_macros_calculator=0x7f050003;
         public static final int weight=0x7f050008;
     }
